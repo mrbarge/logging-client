@@ -1,0 +1,9 @@
+---
+# tasks file for lmaclient
+
+- include_tasks: audit.yml
+- include_tasks: metrics.yml
+- include_tasks: monitors.yml
+- include_tasks: syslog.yml
+- include_tasks: snmp.yml
+- include_tasks: aide.yml

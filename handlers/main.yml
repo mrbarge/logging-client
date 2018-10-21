@@ -1,0 +1,16 @@
+---
+# handlers file for lmaclient
+#
+- name: restart auditd
+  command: service auditd restart
+
+- name: restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
+
+- name: restart collectd
+  service:
+    name: collectd
+    state: restarted
+

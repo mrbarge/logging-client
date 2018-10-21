@@ -1,0 +1,26 @@
+---
+
+- name: install collectd
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - collectd
+    - collectd-rrdtool
+  become: yes
+
+- name: setup collectd service
+  service:
+    name: collectd
+    enabled: yes
+  become: yes 
+
+- name: deploy a collectd config
+  copy:
+    src: client.collectd.conf
+    dest: /etc/collectd.d/client.conf
+    owner: root
+    group: root
+    mode: 0755
+  become: yes
+  notify: restart collectd

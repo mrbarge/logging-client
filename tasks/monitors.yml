@@ -1,0 +1,25 @@
+---
+
+- name: subscribe to epel
+  yum:
+    name: epel-release
+    state: installed
+  become: yes
+
+- name: install nagios plugins
+  yum:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - nagios-common
+    - nagios-plugins-procs
+  become: yes
+
+- name: deploy a plugin check cron
+  cron:
+    name: "nagios check procs"
+    minute: "*/2"
+    job: "/usr/lib64/nagios/plugins/check_procs -w 1:1 -C auditd | logger -t nagios"
+    user: root
+  become: yes
+

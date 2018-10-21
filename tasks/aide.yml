@@ -1,0 +1,9 @@
+---
+
+- name: install aide
+  yum:
+    name: aide
+    state: latest
+  become: yes
+
+    

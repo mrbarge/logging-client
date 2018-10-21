@@ -1,0 +1,11 @@
+---
+
+- name: enable remote forwarding of rsyslog
+  template:
+    src: custom-log.conf.j2
+    dest: /etc/rsyslog.d/custom-log.conf
+    owner: root
+    group: root
+    mode: 0755
+  notify: restart rsyslog
+

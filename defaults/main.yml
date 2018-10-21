@@ -1,0 +1,4 @@
+---
+# defaults file for lmaclient
+
+lma_server: "server.example.com"

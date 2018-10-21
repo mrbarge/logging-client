@@ -1,0 +1,20 @@
+---
+
+- name: install audisp
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - audispd-plugins
+  become: yes
+
+- name: enable audit logging to syslog
+  lineinfile:
+    dest: /etc/audisp/plugins.d/syslog.conf
+    regexp: '^active = .*'
+    line: 'active = yes'
+    backrefs: yes
+    state: present
+  become: yes
+  notify: restart auditd
+
