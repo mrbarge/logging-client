@@ -8,6 +8,26 @@
     - audispd-plugins
   become: yes
 
+- name: enable enriched logging
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    regexp: '^log_format = .*$'
+    line: 'log_format = ENRICHED'
+    backrefs: yes
+    state: present
+  become: yes
+  notify: restart auditd
+
+- name: enable enriched logging
+  lineinfile:
+    dest: /etc/audit/auditd.conf
+    regexp: '^name_format = .*$'
+    line: 'name_format = HOSTNAME'
+    backrefs: yes
+    state: present
+  become: yes
+  notify: restart auditd
+
 - name: enable audit logging to syslog
   lineinfile:
     dest: /etc/audisp/plugins.d/syslog.conf
